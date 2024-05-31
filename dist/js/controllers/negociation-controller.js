@@ -24,5 +24,6 @@ export class NegociationController {
         this.inputDate.value = "";
         this.inputQuantity.value = "";
         this.inputValue.value = "";
+        this.inputDate.focus();
     }
 }
