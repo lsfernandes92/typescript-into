@@ -7,8 +7,8 @@ export class Negociation {
     get volume() {
         return this.quantity * this.value;
     }
-    get data() {
-        const date = new Date(this._date.getDate());
+    get date() {
+        const date = new Intl.DateTimeFormat("pt-BR").format(this._date);
         return date;
     }
 }
