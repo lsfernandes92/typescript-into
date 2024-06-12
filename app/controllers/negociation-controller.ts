@@ -18,15 +18,20 @@ export class NegociationController {
     this.negociationsView.update(this.negociations);
   }
 
-  add(): void {
+  public add(): void {
     const negociation = this.createNegociation();
+
+    if (!negociation.isWeekDay()) {
+      this.messageView.update("Only week days are valid values.");
+      return;
+    }
+
     this.negociations.add(negociation);
-    this.negociationsView.update(this.negociations);
-    this.messageView.update("Negociation added successfully!");
+    this.updateView();
     this.clearForm();
   }
 
-  createNegociation(): Negociation {
+  private createNegociation(): Negociation {
     const regex = /-/g;
     const date = new Date(this.inputDate.value.replace(regex, ','));
     const quantity = parseInt(this.inputQuantity.value);
@@ -35,10 +40,15 @@ export class NegociationController {
     return new Negociation(date, quantity, value);
   }
 
-  clearForm(): void {
+  private clearForm(): void {
     this.inputDate.value = ""
     this.inputQuantity.value = ""
     this.inputValue.value = ""
     this.inputDate.focus();
+  }
+
+  private updateView(): void {
+    this.negociationsView.update(this.negociations);
+    this.messageView.update("Negociation added successfully!");
   }
 }
