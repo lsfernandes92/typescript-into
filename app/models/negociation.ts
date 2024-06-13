@@ -20,4 +20,13 @@ export class Negociation {
     return this._date.getDay() > WeekDays.SUNDAY
         && this._date.getDay() < WeekDays.SATURDAY;
   }
+
+  public static negociationCreator(inputDate: string, inputQuantity: string, inputNumber: string): Negociation {
+    const regex = /-/g;
+    const date = new Date(inputDate.replace(regex, ','));
+    const quantity = parseInt(inputQuantity);
+    const value = parseFloat(inputNumber);
+
+    return new Negociation(date, quantity, value);
+  }
 }
