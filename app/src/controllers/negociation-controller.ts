@@ -1,3 +1,4 @@
+import { inspect } from "../decorators/inspect.js";
 import { logExecutionTime } from "../decorators/log-execution-time.js";
 import { Negociation } from "../models/negociation.js";
 import { Negociations } from "../models/negociations.js";
@@ -19,7 +20,8 @@ export class NegociationController {
     this.negociationsView.update(this.negociations);
   }
 
-  @logExecutionTime()
+  @inspect
+  @logExecutionTime(true)
   public add(): void {
     const negociation = Negociation.negociationCreator(
       this.inputDate.value,
