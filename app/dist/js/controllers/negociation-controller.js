@@ -9,6 +9,7 @@ import { inspect } from "../decorators/inspect.js";
 import { logExecutionTime } from "../decorators/log-execution-time.js";
 import { Negociation } from "../models/negociation.js";
 import { Negociations } from "../models/negociations.js";
+import { NegociationsService } from "../services/negociations-service.js";
 import { MessageView } from "../views/message-view.js";
 import { NegociationsView } from "../views/negociations-view.js";
 export class NegociationController {
@@ -16,6 +17,7 @@ export class NegociationController {
         this.negociations = new Negociations();
         this.negociationsView = new NegociationsView("#negociations-table");
         this.messageView = new MessageView("#mensagemView");
+        this.negociationsService = new NegociationsService();
         this.negociationsView.update(this.negociations);
     }
     add() {
@@ -27,6 +29,16 @@ export class NegociationController {
         this.negociations.add(negociation);
         this.updateView();
         this.clearForm();
+    }
+    import() {
+        this.negociationsService
+            .getTodaysNegociations()
+            .then(todaysNegociations => {
+            for (const negociation of todaysNegociations) {
+                this.negociations.add(negociation);
+            }
+            this.negociationsView.update(this.negociations);
+        });
     }
     clearForm() {
         this.inputDate.value = "";
