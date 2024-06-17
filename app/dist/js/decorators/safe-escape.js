@@ -10,3 +10,4 @@ export function safeEscape(target, propertyKey, descriptor) {
     };
     return descriptor;
 }
+//# sourceMappingURL=safe-escape.js.map

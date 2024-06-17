@@ -3,3 +3,4 @@ export function print(...objects) {
         console.log(object.toText());
     }
 }
+//# sourceMappingURL=print.js.map

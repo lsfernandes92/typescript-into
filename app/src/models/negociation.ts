@@ -40,7 +40,7 @@ export class Negociation implements Printable {
     `; 
   }
 
-  public haveSameDate(negoctiation: Negociation): boolean {
+  public hasSameDate(negoctiation: Negociation): boolean {
     const date = negoctiation.date;
     const dateSplitted = date.split("/");
     const dateToCompare = new Date(parseInt(dateSplitted[2]), parseInt(dateSplitted[1]), parseInt(dateSplitted[0]));

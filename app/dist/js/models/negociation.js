@@ -30,10 +30,11 @@ export class Negociation {
       Value: ${this.value}
     `;
     }
-    haveSameDate(negoctiation) {
+    hasSameDate(negoctiation) {
         const date = negoctiation.date;
         const dateSplitted = date.split("/");
         const dateToCompare = new Date(parseInt(dateSplitted[2]), parseInt(dateSplitted[1]), parseInt(dateSplitted[0]));
         return this._date.getDate() === dateToCompare.getDate();
     }
 }
+//# sourceMappingURL=negociation.js.map

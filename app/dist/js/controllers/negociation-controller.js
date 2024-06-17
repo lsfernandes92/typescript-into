@@ -39,7 +39,7 @@ export class NegociationController {
             return todaysNegociations.filter(todayNegociation => {
                 return !this.negociations
                     .list()
-                    .some(negociation => negociation.haveSameDate(todayNegociation));
+                    .some(negociation => negociation.hasSameDate(todayNegociation));
             });
         })
             .then(todaysNegociations => {
@@ -73,3 +73,4 @@ __decorate([
     inspect,
     logExecutionTime(true)
 ], NegociationController.prototype, "add", null);
+//# sourceMappingURL=negociation-controller.js.map
