@@ -1,10 +1,10 @@
 import { domInjector } from "../decorators/dom-injector.js";
 import { inspect } from "../decorators/inspect.js";
 import { logExecutionTime } from "../decorators/log-execution-time.js";
-import { TodaysNegociation } from "../interfaces/todays-negociation.js";
 import { Negociation } from "../models/negociation.js";
 import { Negociations } from "../models/negociations.js";
 import { NegociationsService } from "../services/negociations-service.js";
+import { print } from "../utils/print.js";
 import { MessageView } from "../views/message-view.js";
 import { NegociationsView } from "../views/negociations-view.js";
 
@@ -39,6 +39,7 @@ export class NegociationController {
     }
 
     this.negociations.add(negociation);
+    print(negociation, this.negociations);
     this.updateView();
     this.clearForm();
   }
@@ -46,6 +47,13 @@ export class NegociationController {
   public import(): void {
     this.negociationsService
       .getTodaysNegociations()
+      .then(todaysNegociations => {
+        return todaysNegociations.filter(todayNegociation => {
+          return !this.negociations
+            .list()
+            .some(negociation => negociation.hasSameDate(todayNegociation));
+        });
+      })
       .then(todaysNegociations => {
         for (const negociation of todaysNegociations) {
           this.negociations.add(negociation);
